@@ -113,12 +113,17 @@ fetch('data.csv')
     const rows = csv.trim().split('\n');
     const headers = rows[0].split(',');
 
-    dataStore = rows.slice(1).map(row => {
+    dataStore = rows.slice(1).filter(row => row.trim() !== "") // 🚀 remove empty rows
+    .map(row => {
       const values = row.split(',');
       let obj = {};
-      headers.forEach((h, i) => obj[h] = values[i]);
-      return obj;
+  
+      headers.forEach((h, i) => {
+        obj[h.trim()] = (values[i] || "").trim();
     });
+
+    return obj;
+  });
     console.log(dataStore);
     // show first record
     showRecord(dataStore[0]);
@@ -135,9 +140,9 @@ document.getElementById('search').addEventListener('input', function(e) {
   }
 
   const result = dataStore.find(d =>
-    d.driver_name.toLowerCase().includes(q) ||
-    d.main_carplate.toLowerCase().includes(q) ||
-    d.current_carplate.toLowerCase().includes(q)
+    (d.driver_name || "").toLowerCase().includes(q) ||
+    (d.main_carplate || "").toLowerCase().includes(q) ||
+    (d.current_carplate || "").toLowerCase().includes(q)
   );
 
   if (result) {
