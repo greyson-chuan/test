@@ -119,7 +119,7 @@ fetch('data.csv')
       headers.forEach((h, i) => obj[h] = values[i]);
       return obj;
     });
-
+    console.log(dataStore);
     // show first record
     showRecord(dataStore[0]);
   });
