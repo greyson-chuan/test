@@ -126,7 +126,13 @@ fetch('data.csv')
 
 // Search function
 document.getElementById('search').addEventListener('input', function(e) {
-  const q = e.target.value.toLowerCase();
+  const q = e.target.value.trim().toLowerCase();
+
+  // 🔥 IF SEARCH IS EMPTY → CLEAR TABLE
+  if (q === "") {
+    clearDashboard();
+    return;
+  }
 
   const result = dataStore.find(d =>
     d.driver_name.toLowerCase().includes(q) ||
@@ -134,7 +140,11 @@ document.getElementById('search').addEventListener('input', function(e) {
     d.current_carplate.toLowerCase().includes(q)
   );
 
-  if (result) showRecord(result);
+  if (result) {
+    showRecord(result);
+  } else {
+    clearDashboard(); // no match
+  }
 });
 
 // Render dashboard
@@ -158,6 +168,15 @@ function showRecord(d) {
     <div class="row"><span class="label">Rental</span><span class="value">$${d.rental_rate}</span></div>
     <div class="row"><span class="label">CDW</span><span class="value">$${d.cdw_rate}</span></div>
   `;
+}
+
+// Clear dashboard
+function clearDashboard() {
+  document.getElementById('driverInfo').innerHTML =
+    `<div style="color:#888;">No driver selected</div>`;
+
+  document.getElementById('contractInfo').innerHTML =
+    `<div style="color:#888;">No contract selected</div>`;
 }
 </script>
 
