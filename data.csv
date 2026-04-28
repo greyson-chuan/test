@@ -1,2 +1,3 @@
 driver_name,nric,payment_type,main_carplate,car_model,salesperson,rm,deposit,contract_name,status,start_date,end_date,rental_rate,cdw_rate,cdw_name,current_carplate
-Lim Lee Ching,S1777639H,EDDA,SNH1767G,Toyota Altis Hybrid,Agnes,Agnes,500,ER-C-25-09-089R01,Active,26/09/2025,25/09/2026,87.00,12.00,ECDW+,SNH1767G
+Lim Lee Ching,S1234567H,EDDA,SNH1767G,Toyota Altis Hybrid,Agnes,Agnes,500,ER-C-25-09-089R01,Active,26/09/2025,25/09/2026,87.00,12.00,ECDW+,SNH1767G
+Goh Chin Shen,S9876543C,EDDA,SNH3584D,Toyota Altis Hybrid,Agnes,Agnes,500,FR-C-25-09-112R01,Active,26/09/2025,25/09/2026,87.00,12.00,ECDW+,SNH3584D
