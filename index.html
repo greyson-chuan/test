@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple CSV Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<h1>Fruit Dashboard</h1>
+
+<table border="1" id="data-table">
+  <thead>
+    <tr><th>Name</th><th>Value</th></tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<canvas id="chart" width="400" height="200"></canvas>
+
+<script>
+fetch('data.csv')
+  .then(response => response.text())
+  .then(csv => {
+    const rows = csv.split('\n').slice(1); // skip header
+
+    const labels = [];
+    const values = [];
+
+    const tableBody = document.querySelector('#data-table tbody');
+
+    rows.forEach(row => {
+      const [name, value] = row.split(',');
+
+      if (!name) return;
+
+      labels.push(name);
+      values.push(Number(value));
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${name}</td><td>${value}</td>`;
+      tableBody.appendChild(tr);
+    });
+
+    // Create chart
+    new Chart(document.getElementById('chart'), {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Values',
+          data: values
+        }]
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
