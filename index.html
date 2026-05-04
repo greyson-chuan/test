@@ -6,7 +6,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script>
-  const supabase = window.supabase.createClient(
+  const supabaseClient = window.supabase.createClient(
     "https://sotkmkmqtebcoursugbz.supabase.co",
     "sb_publishable_MfDwmmpwh_TBFK_UE1xzUw_z-C5bjfX"
   );
@@ -114,14 +114,14 @@
 
 </div>
 
-<button onclick="login()">Login with Microsoft</button>
+<button onclick="logout()">Logout</button>
 
 <script>
 let dataStore = [];
 let currentRecord = null;
 
 async function protectPage() {
-  const { data: { session } } = await supabase.auth.getSession();
+  const { data: { session } } = await supabaseClient.auth.getSession();
 
   if (!session) {
     // Not logged in → redirect
@@ -135,11 +135,21 @@ async function protectPage() {
 protectPage();
 
 async function getUser() {
-  const { data } = await supabase.auth.getUser();
+  const { data } = await supabaseClient.auth.getUser();
+  if (!user.email.endsWith("@focusrentals.sg")) {
+    await supabaseClient.auth.signOut();
+    alert("Not allowed");
+    window.location.href = "/login.html";
+  }
   console.log(data.user);
 }
 
 getUser();
+
+async function logout() {
+  await supabaseClient.auth.signOut();
+  window.location.href = "/login.html";
+}
 
 // Load CSV
 fetch('data.csv')
