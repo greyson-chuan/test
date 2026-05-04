@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Driver Dashboard</title>
+</head>
+<body>
+  <button onclick="login()">Login with Microsoft</button>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<script>
+const supabase = window.supabase.createClient(
+  "https://YOUR_PROJECT_ID.supabase.co",
+  "YOUR_ANON_KEY"
+);
+
+async function login() {
+  await supabase.auth.signInWithOAuth({
+    provider: "azure"
+  });
+}
+</script>
+</html>
