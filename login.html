@@ -17,7 +17,7 @@ const supabaseClient = window.supabase.createClient(
 
 async function login() {
   await supabaseClient.auth.signInWithOAuth({
-    provider: "azure"
+    provider: "azure",
     options: {
       redirectTo: "https://greyson-chuan.github.io/test/"
     }
