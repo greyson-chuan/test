@@ -135,7 +135,7 @@ async function protectPage() {
 protectPage();
 
 async function getUser() {
-  const { data } = await supabaseClient.auth.getUser();
+  const { data: { user } } = await supabaseClient.auth.getUser();
   if (!user.email.endsWith("@focusrentals.sg")) {
     await supabaseClient.auth.signOut();
     alert("Not allowed");
