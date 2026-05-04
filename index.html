@@ -125,7 +125,7 @@ async function protectPage() {
 
   if (!session) {
     // Not logged in → redirect
-    window.location.href = "/login.html";
+    window.location.href = "/test/login.html";
   } else {
     // Logged in → show content
     document.getElementById("content").style.display = "block";
@@ -139,7 +139,7 @@ async function getUser() {
   if (!user.email.endsWith("@focusrentals.sg")) {
     await supabaseClient.auth.signOut();
     alert("Not allowed");
-    window.location.href = "/login.html";
+    window.location.href = "/test/login.html";
   }
   console.log(data.user);
 }
@@ -148,7 +148,7 @@ getUser();
 
 async function logout() {
   await supabaseClient.auth.signOut();
-  window.location.href = "/login.html";
+  window.location.href = "/test/login.html";
 }
 
 // Load CSV
